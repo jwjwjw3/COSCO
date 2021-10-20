@@ -32,6 +32,7 @@
   </a>
 </div>
 
+<<<<<<< HEAD
 COSCO is an AI based coupled-simulation and container orchestration framework for integrated Edge, Fog and Cloud Computing Environments. It's a simple python based software solution, where academics or practitioners can develop, simulate, test and deploy their scheduling policies. Further, this repo presents a novel gradient-based optimization strategy using deep neural networks as surrogate functions and co-simulations to facilitate decision making. A tutorial of the COSCO framework was presented at the International Conference of Performance Engineering (ICPE) 2022. Recording available [here](https://youtu.be/osjpaNmkm_w).
 
 <img src="https://github.com/imperial-qore/COSCO/blob/master/wiki/COSCO.jpg" width="900" align="middle">
@@ -62,6 +63,13 @@ We present two novel algorithms in this work: GOBI and GOBI*. GOBI uses a neural
 
 A detailed course on using the COSCO framework for deep learning based scheduling (deep surrogate optimization and co-simulation) in fog environments is available as a [youtube playlist](https://www.youtube.com/playlist?list=PLN_nzHzuaOBQijEwy2Fy8c09-dWYVe4XO).
  
+=======
+# HUNTER
+
+The worldwide adoption of cloud data centers (CDCs) has given rise to the ubiquitous demand for hosting application services on the cloud. Further, contemporary data-intensive industries have seen a sharp upsurge in the resource requirements of modern applications. This has led to the provisioning of an increased number of cloud servers, giving rise to higher energy consumption and, consequently, sustainability concerns. Traditional heuristics and reinforcement learning based algorithms for energy-efficient cloud resource management address the scalability and adaptability related challenges to a limited extent. Existing work often fails to capture dependencies across thermal characteristics of hosts, resource consumption of tasks and the corresponding scheduling decisions. This leads to poor scalability and an increase in the compute resource requirements, particularly in environments with non-stationary resource demands. To address these limitations, we propose an artificial intelligence (AI) based holistic resource management technique for sustainable cloud computing called HUNTER. The proposed model formulates the goal of optimizing energy efficiency in data centers as a multi-objective scheduling problem, considering three important models: energy, thermal and cooling. HUNTER utilizes a Gated Graph Convolution Network as a surrogate model for approximating the Quality of Service (QoS) for a system state and generating optimal scheduling decisions. Experiments on simulated and physical cloud environments using the CloudSim toolkit and the COSCO framework show that HUNTER outperforms state-of-the-art baselines in terms of energy consumption, SLA violation, scheduling time, cost and temperature by up to 12, 35, 43, 54 and 3 percent respectively.
+
+
+>>>>>>> 23b92ec (Update README.md)
 ## Quick Start Guide
 To run the COSCO framework, install required packages using
 ```bash
@@ -69,7 +77,7 @@ python3 install.py
 ```
 To run the code with the required scheduler, modify line 106 of `main.py` to one of the several options including LRMMTR, RF, RL, RM, Random, RLRMMTR, TMCR, TMMR, TMMTR, GA, GOBI.
 ```python
-scheduler = GOBIScheduler('energy_latency_'+str(HOSTS))
+scheduler = GGCNScheduler('energy_latency_'+str(HOSTS))
 ```
 
 To run the simulator, use the following command
@@ -85,6 +93,7 @@ You can directly run tests on the results using a Gitpod Workspace without needi
 ## Wiki
 Access the [wiki](https://github.com/imperial-qore/COSCO/wiki) for detailed installation instructions, implementing a custom scheduler and replication of results. All execution traces and training data is available at [Zenodo](https://zenodo.org/record/4897944) under CC License.
 
+<<<<<<< HEAD
 ## Links
 | Items | Contents | 
 | --- | --- |
@@ -109,6 +118,18 @@ Our work is published in IEEE TPDS journal. Cite using the following bibtex entr
   volume={33},
   number={1},
   pages={101-116},
+=======
+## Arxiv preprint
+https://arxiv.org/abs/2110.05529.
+
+## Cite this work
+```bibtex
+@article{tuli2021hunter,
+  title={{HUNTER: AI based Holistic Resource Management for Sustainable Cloud Computing}},
+  author={Tuli, Shreshth and Gill, Sukhpal Singh and Xu, Minxian and Garraghan, Peter and Bahsoon, Rami and Dustdar, Scharam and Sakellariou, Rizos and Rana, Omer and Buyya, Rajkumar and Casale, Giuliano and others},
+  journal={Journal of Systems and Software},
+  year={2021}
+>>>>>>> 23b92ec (Update README.md)
 }
 ```
 ## License
