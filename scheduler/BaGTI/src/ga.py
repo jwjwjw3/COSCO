@@ -1,7 +1,7 @@
 import random 
 import torch
 import numpy as np
-from src.constants import *  
+from .constants import *  
  
 class Individual(object): 
     def __init__(self, dataset, f, bounds, data_type, hosts, chromosome=[]): 
