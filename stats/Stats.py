@@ -3,18 +3,21 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scheduler.GOBI import GOBIScheduler
 
-plt.style.use(['science'])
-plt.rcParams["text.usetex"] = False
+# plt.style.use(['science'])
+# plt.rcParams["text.usetex"] = False
 
 class Stats():
-	def __init__(self, Environment, WorkloadModel, Datacenter, Scheduler):
+	def __init__(self, Environment, WorkloadModel, Datacenter, Scheduler, simu_GOBI=False):
 		self.env = Environment
 		self.env.stats = self
 		self.workload = WorkloadModel
 		self.datacenter = Datacenter
 		self.scheduler = Scheduler
-		self.simulated_scheduler = GOBIScheduler('energy_latency_'+str(self.datacenter.num_hosts))
-		self.simulated_scheduler.env = self.env
+		if simu_GOBI:
+			self.simulated_scheduler = GOBIScheduler('energy_latency_'+str(self.datacenter.num_hosts))
+			self.simulated_scheduler.env = self.env
+		else:
+			self.simulated_scheduler = None
 		self.initStats()
 
 	def initStats(self):	
@@ -100,7 +103,8 @@ class Stats():
 		metrics['slaviolations'] = len(np.where([c.destroyAt > c.sla for c in destroyed])[0])
 		metrics['slaviolationspercentage'] = metrics['slaviolations'] * 100.0 / len(destroyed) if len(destroyed) > 0 else 0
 		metrics['waittime'] = [c.startAt - c.createAt for c in destroyed]
-		metrics['energytotalinterval_pred'], metrics['avgresponsetime_pred'] = self.runSimulationGOBI()
+		if self.simulated_scheduler != None:
+			metrics['energytotalinterval_pred'], metrics['avgresponsetime_pred'] = self.runSimulationGOBI()
 		self.metrics.append(metrics)
 
 	def saveSchedulerInfo(self, selectedcontainers, decision, schedulingtime):
@@ -286,7 +290,8 @@ class Stats():
 	def generateDatasets(self, dirname):
 		# self.generateDatasetWithInterval(dirname, 'cpu', objfunc='energytotalinterval')
 		self.generateDatasetWithInterval(dirname, 'cpu', metric2='apparentips', objfunc='energytotalinterval', objfunc2='avgresponsetime')
-		self.generateDatasetWithInterval2(dirname, 'cpu', 'apparentips', 'energytotalinterval_pred', 'avgresponsetime_pred', objfunc='energytotalinterval', objfunc2='avgresponsetime')
+		if self.simulated_scheduler != None:
+			self.generateDatasetWithInterval2(dirname, 'cpu', 'apparentips', 'energytotalinterval_pred', 'avgresponsetime_pred', objfunc='energytotalinterval', objfunc2='avgresponsetime')
 		
 	def generateCompleteDatasets(self, dirname):
 		self.generateCompleteDataset(dirname, self.hostinfo, 'hostinfo')
