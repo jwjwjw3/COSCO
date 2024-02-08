@@ -54,9 +54,9 @@ RUN \
     ldconfig  
 
 
-COPY execute.sh .
-RUN chmod +x execute.sh
+COPY execute_pocketsphinx.sh .
+RUN chmod +x execute_pocketsphinx.sh
 
 COPY assets assets
-CMD ["./execute.sh"]
+CMD ["./execute_pocketsphinx.sh"]
 

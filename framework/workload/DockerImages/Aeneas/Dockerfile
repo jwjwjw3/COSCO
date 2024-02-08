@@ -12,7 +12,8 @@ RUN \
     bc \
     python \
     python-pip \
-    git
+    git \
+    ffmpeg
 
 RUN \
     apt-get install -y \
@@ -34,9 +35,9 @@ RUN \
     pip install -r requirements.txt && \
     python setup.py build_ext --inplace
     
-COPY execute.sh .
-RUN chmod +x execute.sh
+COPY execute_aeneas.sh .
+RUN chmod +x execute_aeneas.sh
 
 COPY assets assets
 
-CMD ["./execute.sh"]
+CMD ["./execute_aeneas.sh"]

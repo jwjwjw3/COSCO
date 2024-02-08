@@ -23,14 +23,16 @@ RUN git checkout f6d861736038da22c9eb0739dca84003c5a5e275
 RUN echo '#include <sys/select.h>' > examples/go.c.updated
 RUN cat examples/go.c >> examples/go.c.updated
 RUN mv examples/go.c.updated examples/go.c
+# enable OpenMP for CPU multi-threading
+sed -i 's/OPENMP=0/OPENMP=1/g' Makefile
 RUN make
 RUN wget https://pjreddie.com/media/files/yolov3.weights
 
 RUN mkdir output 
     
-COPY execute.sh .
-RUN chmod +x execute.sh
+COPY execute_yolo.sh .
+RUN chmod +x execute_yolo.sh
 COPY assets assets
 
-CMD ["./execute.sh"]
+CMD ["./execute_yolo.sh"]
 
